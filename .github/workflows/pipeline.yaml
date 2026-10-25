@@ -10,27 +10,21 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     env:
       DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
       DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
       REPO_PATH: /Workspace/Users/${{ secrets.DATABRICKS_EMAIL }}/databricks
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Setup Python
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.8'
+        python-version: '3.12'
 
     - uses: databricks/setup-cli@main
 
-    - name: Extract branch name
-      shell: bash
-      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      id: extract_branch
-
     - name: Update Databricks Git folder
-      run: |
-        databricks repos update ${{ env.REPO_PATH }} --branch "${{ steps.extract_branch.outputs.branch }}"
+      run: databricks repos update "$REPO_PATH" --branch "${{ github.ref_name }}"
