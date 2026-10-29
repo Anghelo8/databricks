@@ -1,0 +1,29 @@
+{
+  "schemaVersion" : 1,
+  "runId" : "openmeteo-lote-01",
+  "stage" : "VALIDATION",
+  "status" : "COMPLETED",
+  "startedAt" : "2026-10-29T05:06:42.819698700Z",
+  "completedAt" : "2026-10-29T05:06:46.214009400Z",
+  "durationMs" : 3395,
+  "sparkJobs" : 8,
+  "rows" : 142350,
+  "detail" : "71175 eventos válidos, 71175 observados",
+  "metrics" : {
+    "reasons" : [ {
+      "table" : "open_meteo",
+      "reason" : "REGISTRO_DUPLICADO",
+      "rows" : 71175
+    } ],
+    "tables" : {
+      "open_meteo" : {
+        "received" : 142350,
+        "accepted" : 71175,
+        "rejected" : 71175
+      }
+    },
+    "accepted" : 71175,
+    "received" : 142350,
+    "rejected" : 71175
+  }
+}
